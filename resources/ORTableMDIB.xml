@@ -78,40 +78,32 @@
         </p2:Sco>
 				<p2:Vmd Handle="MDC_DEV_OR_TABLE_VMD">
 					<p2:AlertSystem Handle="MDC_DEV_OR_TABLE_ASYS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-						<p2:AlertCondition Handle="MDC_DEV_OR_TABLE_HEIGHT_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+						<p2:AlertCondition Handle="MDC_DEV_OR_TABLE_HEIGHT_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:AlertConditionDescriptor">
 							<p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
-							<p2:MaxLimits AbsoluteAccuracy="1" Lower="135" Upper="140"/>
 						</p2:AlertCondition>
-            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_HEIGHT_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_HEIGHT_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:AlertConditionDescriptor">
               <p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
-              <p2:MaxLimits AbsoluteAccuracy="1" Lower="60" Upper="65"/>
             </p2:AlertCondition>
 
-            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_TREND_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_TREND_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:AlertConditionDescriptor">
               <p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
-              <p2:MaxLimits AbsoluteAccuracy="1" Lower="40" Upper="45"/>
             </p2:AlertCondition>
-            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_TREND_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_TREND_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:AlertConditionDescriptor">
               <p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
-              <p2:MaxLimits AbsoluteAccuracy="1" Lower="-45" Upper="-40"/>
             </p2:AlertCondition>
 
-            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_TILT_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_TILT_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:AlertConditionDescriptor">
               <p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
-              <p2:MaxLimits AbsoluteAccuracy="1" Lower="20" Upper="25"/>
             </p2:AlertCondition>
-            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_TILT_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_TILT_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:AlertConditionDescriptor">
               <p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
-              <p2:MaxLimits AbsoluteAccuracy="1" Lower="-25" Upper="-20"/>
             </p2:AlertCondition>
 
-            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_BACKPLATE_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_BACKPLATE_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:AlertConditionDescriptor">
               <p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
-              <p2:MaxLimits AbsoluteAccuracy="1" Lower="-40" Upper="-35"/>
             </p2:AlertCondition>
-            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_BACKPLATE_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_BACKPLATE_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:AlertConditionDescriptor">
               <p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
-              <p2:MaxLimits AbsoluteAccuracy="1" Lower="75" Upper="80"/>
             </p2:AlertCondition>
 
 
@@ -175,29 +167,21 @@
 		</p2:MdDescription>
 		<p2:MdState StateVersion="115" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-		<p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_HEIGHT_UPPER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
-				<p2:Limits AbsoluteAccuracy="1" Lower="135" Upper="140"/>
+		<p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_HEIGHT_UPPER" StateVersion="0" xsi:type="p2:AlertConditionState">
 			</p2:State>
-      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_HEIGHT_LOWER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
-        <p2:Limits AbsoluteAccuracy="1" Lower="60" Upper="65"/>
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_HEIGHT_LOWER" StateVersion="0" xsi:type="p2:AlertConditionState">
       </p2:State>
-      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_TREND_UPPER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
-        <p2:Limits AbsoluteAccuracy="1" Lower="40" Upper="45"/>
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_TREND_UPPER" StateVersion="0" xsi:type="p2:AlertConditionState">
       </p2:State>
-      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_TREND_LOWER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
-        <p2:Limits AbsoluteAccuracy="1" Lower="-45" Upper="-40"/>
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_TREND_LOWER" StateVersion="0" xsi:type="p2:AlertConditionState">
       </p2:State>
-      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_TILT_UPPER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
-        <p2:Limits AbsoluteAccuracy="1" Lower="20" Upper="25"/>
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_TILT_UPPER" StateVersion="0" xsi:type="p2:AlertConditionState">
       </p2:State>
-      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_TILT_LOWER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
-        <p2:Limits AbsoluteAccuracy="1" Lower="-25" Upper="-20"/>
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_TILT_LOWER" StateVersion="0" xsi:type="p2:AlertConditionState">
       </p2:State>
-      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_BACKPLATE_UPPER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
-        <p2:Limits AbsoluteAccuracy="1" Lower="75" Upper="80"/>
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_BACKPLATE_UPPER" StateVersion="0" xsi:type="p2:AlertConditionState">
       </p2:State>
-      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_BACKPLATE_LOWER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
-        <p2:Limits AbsoluteAccuracy="1" Lower="-40" Upper="-35"/>
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_BACKPLATE_LOWER" StateVersion="0" xsi:type="p2:AlertConditionState">
       </p2:State>
 
 
