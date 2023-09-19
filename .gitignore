@@ -1,0 +1,14 @@
+# Note:
+# Only use one gitignore file per project to
+# keep track of all ignored files in one place.
+
+# external
+external/sdcX
+
+# Visual Studio
+out/
+build/
+.vs/
+
+# Visual Studio Code
+.vscode/
