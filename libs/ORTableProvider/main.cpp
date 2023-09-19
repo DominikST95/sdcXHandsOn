@@ -1,7 +1,7 @@
 /**
  * @brief This file is destined to be used in the sdcX training course hands-on parts. It models an operating table, which MDIB is located in
- * resources/ORTableMDIB.xml
- * The MDIB consists of two channels, one for orientation (trend, tilt, backplate) and table height, one for battery information. 
+ * resources/ORTableMDIB.xml. The demo code manages a virtual OR table that stores the value per axis.
+ * The MDIB consists of two channels, one for orientation (trend, tilt, backplate) and table height, one for predefined positions. 
  * It contains one alert system with one alert condition per axis that shall be triggered, when the axis are in a delta of 5° to the respective maximum
  * For operations, the table offers activates for each axis movement and SetContextState operations for setting Workflow and Patient Contexts. 
  * Also, for alert signal handling, a SetAlertStateOperation is added.
@@ -42,7 +42,7 @@
 #include <thread>
 
 // Change this to a unique EPR
-const std::string PROVIDER_EPR("urn:uuid:sdcx-ORTableProvider-1234-12345");
+const std::string PROVIDER_EPR("TODO");
 
 // In case the provider shall be started without TLS, set this variable to false
 constexpr bool ENABLE_TLS{true};
@@ -68,6 +68,7 @@ struct VirtualORTable
     PredefinedPosition predefinedPosition;
 };
 
+// Global object for data access
 VirtualORTable virtualTable;
 
 /**
@@ -84,18 +85,11 @@ public:
     virtual void
         onNewTransaction(std::shared_ptr<TransactionHandler<SetOperationStatesContainer::SetStringStates>> p_transactionHandler) override
     {
-        if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO")
-        {
-            if (p_transactionHandler->getData().getState().getMetricValue()->getValue().getValue() == "NullLevel")
-            {
-                virtualTable.predefinedPosition = PredefinedPosition::NullLevel;
-            }
-            else if (p_transactionHandler->getData().getState().getMetricValue()->getValue().getValue() == "BeachChair")
-            {
-                virtualTable.predefinedPosition = PredefinedPosition::BeachChair;
-            }
-            p_transactionHandler->transitionFromStartedTo(UserInterfaces::Set::OnStartedInvocationState::Fin);
-        }
+        /* 
+        
+        TODO 
+        When receiving the MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO operation, set the virtualTable.predefinedPosition accordingly. Then, transition to "FIN" 
+        */
     }
 };
 
@@ -114,83 +108,15 @@ public:
     virtual void 
         onNewTransaction(std::shared_ptr<TransactionHandler<SetOperationStatesContainer::ActivateStates>> p_transactionHandler) override
     {
-        if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_APPLY_PREDEFINED_POSITION")
-        {
-            // Apply change
-            if (virtualTable.predefinedPosition == PredefinedPosition::NullLevel)
-            {
-                virtualTable.height = 80;
-                virtualTable.trend = 0;
-                virtualTable.tilt = 0;
-                virtualTable.backplate = 0;
-            }
-            else if (virtualTable.predefinedPosition == PredefinedPosition::BeachChair)
-            {
-                virtualTable.height = 80;
-                virtualTable.trend = 0;
-                virtualTable.tilt = 0;
-                virtualTable.backplate = 45;
-            }
-        }
-        else if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_INCREASE_TABLE_HEIGHT_SCO")
-        {
-            if (virtualTable.height < 140)
-            {
-                virtualTable.height++;
-            }
-        }
-        else if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_DECREASE_TABLE_HEIGHT_SCO")
-        {
-            if (virtualTable.height > 60)
-            {
-                virtualTable.height--;
-            }
-        }
-        else if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_INCREASE_TREND_SCO")
-        {
-            if (virtualTable.trend < 45)
-            {
-                virtualTable.trend += 0.1;
-            }
-        }
-        else if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_DECREASE_TREND_SCO")
-        {
-            if (virtualTable.trend > -45)
-            {
-                virtualTable.trend-=0.1;
-            }
-        }
-        else if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_INCREASE_TILT_SCO")
-        {
-            if (virtualTable.tilt < 25)
-            {
-                virtualTable.tilt += 0.1;
-            }
-        }
-        else if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_DECREASE_TILT_SCO")
-        {
-            if (virtualTable.tilt > -25)
-            {
-                virtualTable.tilt -= 0.1;
-            }
-        }
-        else if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_INCREASE_BACKPLATE_SCO")
-        {
-            if (virtualTable.backplate < 80)
-            {
-                virtualTable.backplate += 0.1;
-            }
-        }
-        else if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_DECREASE_BACKPLATE_SCO")
-        {
-            if (virtualTable.backplate > -40)
-            {
-                virtualTable.backplate -= 0.1;
-            }
-        }
+        /*
+            TODO
+            Upon receiving an activate on MDC_OR_TABLE_ACTIVATE_APPLY_PREDEFINED_POSITION, apply the predefined position in the virtual table
+            Nulllevel: Height 80, Rest 0
+            Beach Chair: Height 80, Trend 0, Tilt 0, Backplate 45
 
-
-        p_transactionHandler->transitionFromStartedTo(UserInterfaces::Set::OnStartedInvocationState::Fin);
+            Upon receiving any other activate, increase/decrease the value by 1 (height), 0.1 (angles). Keep the margins in mind. 
+            Then, traverse directly to FIN
+        */
     }
 };
 
@@ -328,12 +254,14 @@ public:
     {
         auto time = DateTimeHelper::millisecondsSinceEpoch();
 
+
         // Update changes 
         auto updateAccess = m_provider->getMDIBGateway()->makeUpdateAccess();
-        updateAccess.updateNumericMetricValue(XS::String("MDC_OR_TABLE_HEIGHT"), XS::Decimal(std::to_string(virtualTable.height)), time);
-        updateAccess.updateNumericMetricValue(XS::String("MDC_OR_TABLE_TREND"), XS::Decimal(std::to_string(virtualTable.trend)), time);
-        updateAccess.updateNumericMetricValue(XS::String("MDC_OR_TABLE_TILT"), XS::Decimal(std::to_string(virtualTable.tilt)), time);
-        updateAccess.updateNumericMetricValue(XS::String("MDC_OR_TABLE_BACKPLATE"), XS::Decimal(std::to_string(virtualTable.backplate)), time);
+
+        /*   
+            TODO 
+            Update the numeric metric values using the given update access
+        */
 
         auto result = m_provider->getMDIBGateway()->commit(std::move(updateAccess));
         if (!result.success())
@@ -349,85 +277,61 @@ public:
         // Update changes 
         auto updateAccess = m_provider->getMDIBGateway()->makeUpdateAccess();
         
+        /*
+            TODO
+            Check the margins and trigger the alert conditions and signals
+            In case no alert is present, deactivate them
+        
+        */
+
         // Height
         if (virtualTable.height >= 135 && virtualTable.height <= 140)
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_HEIGHT_UPPER"), true, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_HEIGHT_UPPER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::On);
+
 
         }
         else if (virtualTable.height <= 65 && virtualTable.height >= 60)
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_HEIGHT_LOWER"), true, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_HEIGHT_LOWER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::On);
 
         }
         else
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_HEIGHT_UPPER"), false, time);            
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_HEIGHT_LOWER"), false, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_HEIGHT_UPPER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::Off);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_HEIGHT_LOWER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::Off);
         }
         // Trend
         if (virtualTable.trend >= 40 && virtualTable.trend <= 45)
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TREND_UPPER"), true, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TREND_UPPER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::On);
 
         }
         else if (virtualTable.trend <= -40 && virtualTable.trend >= -45)
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TREND_LOWER"), true, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TREND_LOWER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::On);
 
         }
         else
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TREND_UPPER"), false, time);
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TREND_LOWER"), false, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TREND_UPPER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::Off);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TREND_LOWER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::Off);
         }
         // Tilt
         if (virtualTable.tilt >= 20 && virtualTable.tilt <= 25)
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TILT_UPPER"), true, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TILT_UPPER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::On);
 
         }
         else if (virtualTable.tilt <= -20 && virtualTable.tilt >= -25)
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TILT_LOWER"), true, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TILT_LOWER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::On);
 
         }
         else
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TILT_UPPER"), false, time);
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TILT_LOWER"), false, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TILT_UPPER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::Off);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_TILT_LOWER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::Off);
         }
         // Back
         if (virtualTable.backplate >= 75 && virtualTable.backplate <= 80)
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_BACKPLATE_UPPER"), true, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_BACKPLATE_UPPER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::On);
 
         }
         else if (virtualTable.backplate <= -35 && virtualTable.backplate >= -40)
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_BACKPLATE_LOWER"), true, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_BACKPLATE_LOWER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::On);
 
         }
         else
         {
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_BACKPLATE_UPPER"), false, time);
-            updateAccess.updateAlertConditionPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_BACKPLATE_LOWER"), false, time);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_BACKPLATE_UPPER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::Off);
-            updateAccess.updateAlertSignalPresenceWithCheck(XS::String("MDC_DEV_OR_TABLE_BACKPLATE_LOWER_SIGNAL"), ParticipantModel::PM::AlertSignalPresence::Off);
         }
 
         auto result = m_provider->getMDIBGateway()->commit(std::move(updateAccess));
@@ -451,6 +355,7 @@ public:
                 applyChanges();
                 applyAlarms();
 
+                
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
             }
         });
@@ -546,24 +451,15 @@ int main()
 
     //
     // Create Handlers to listen for events as needed
-    
-    // Discovery, DPWS and Get handlers are not specified in this simple example. The user could be informed about incoming Probe/Resolve/Get requests via these. See ReferenceProvider for 
-    // implementation examples
-
-    // register a callback for incoming activate messages. Activates are used to trigger actions - in this example the mode of the pulsoximeter is switched    
-    auto setValueHandler = std::make_shared<DenyAllExternalControlHandler<SetOperationStatesContainer::SetValueStates>>();    
-    auto setStringHandler = std::make_shared<DenyAllExternalControlHandler<SetOperationStatesContainer::SetStringStates>>();
+    auto setStringHandler = std::make_shared<ORTableSetStringHandler>();
     auto orTableActivateHandler = std::make_shared<ORTableActivateHandler>();
     auto orTableSetAlertStateHandler = std::make_shared<ORTableSetAlertStateHandler>();
     auto orTableSetContextStateHandler = std::make_shared<ORTableSetContextStateHandler>();
-    auto orTableSetMetricStateHandler = std::make_shared<DenyAllExternalControlHandler<SetOperationStatesContainer::SetMetricStates>>();
 
 
-    provider->registerSetValueExternalControlHandler(setValueHandler);
     provider->registerSetStringExternalControlHandler(setStringHandler);
     provider->registerActivateExternalControlHandler(orTableActivateHandler);
     provider->registerSetAlertStateExternalControlHandler(orTableSetAlertStateHandler);
-    provider->registerSetMetricStateExternalControlHandler(orTableSetMetricStateHandler);
     provider->registerSetContextStateExternalControlHandler(orTableSetContextStateHandler);
 
     /*
@@ -572,7 +468,7 @@ int main()
     * 
     */
     // after setting up everything, the provider can be started
-    provider->startup();
+    // TODO
 
     // start a thread that simulates an update of the values and notifies all connected consumers
     auto valueUpdater = std::make_unique<ValueUpdater>(provider.get());
