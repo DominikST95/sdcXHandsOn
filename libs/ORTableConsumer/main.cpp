@@ -43,7 +43,7 @@
 using namespace Logging;
 
 // Adapt accordingly
-const std::string TARGET_EPR = "urn:uuid:sdcx-ORTableProvider-1234-12345";
+const std::string TARGET_EPR = "TODO";
 
 std::unique_ptr<ConsumerAPI::SDCConsumer> consumer;
 
@@ -150,13 +150,6 @@ void onOperationInvokedReport(UserInterfaces::Reporting::ConsumerReporting::API:
                                                     p_data.getInvocationInfo().getInvocationState())));
 }
 
-bool sendActivate(std::string operation)
-{
-    auto response = consumer->activate(operation);
-    return response.getInvocationInfo().getInvocationState() != MessageModel::MSG::InvocationState::Fail;
-}
-
-
 int main(int argc, char* argv[])
 {
     /*
@@ -212,22 +205,12 @@ int main(int argc, char* argv[])
     // Create a new Handler for Discovery
     auto discoveryHandler = discoveryService->createDiscoveryHandler();
 
+    /*
+        TODO
+        Perform discovery by either resolve or a probe and subsequent filtering.
+        After discovery, create a consumer object and store it in consumer
+    */
 
-    // search for the device by EPR in the network
-    try
-    {
-        auto targetEndpoint = discoveryHandler->resolve(TARGET_EPR).waitForResults();
-
-        LogBroker::getInstance().log(LogMessage("ORTableConsumer", Severity::Notice, "Found EPR. Connecting to Provider"));
-        // instantiate consumer class with the endpoint information from discovery
-        auto consumerConfig = std::make_shared<Config::ConsumerConfig>(*localAddress, createTLSConfig());
-        consumer = std::make_unique<ConsumerAPI::SDCConsumer>(sdcCore, *targetEndpoint, consumerConfig);
-    }
-    catch (const std::exception& e)
-    {
-        LogBroker::getInstance().log(LogMessage("ORTableConsumer", Severity::Notice, "Discovery failed: " + std::string(e.what())));
-        return -1;
-    }
 
     // Register callback for report notifications
     auto notifier = consumer->createReportingNotifier();
@@ -266,63 +249,55 @@ int main(int argc, char* argv[])
 
         if (input == 'a')
         {
-            sendActivate("MDC_OR_TABLE_ACTIVATE_INCREASE_TABLE_HEIGHT_SCO");
+            // TODO    
         }
         else if (input == 'b')
         {
-            sendActivate("MDC_OR_TABLE_ACTIVATE_DECREASE_TABLE_HEIGHT_SCO");
+            // TODO    
         }
         else if (input == 'c')
         {
-            sendActivate("MDC_OR_TABLE_ACTIVATE_INCREASE_TREND_SCO");
+            // TODO    
         }
         else if (input == 'd')
         {
-            sendActivate("MDC_OR_TABLE_ACTIVATE_DECREASE_TREND_SCO");
+            // TODO    
         }
         else if (input == 'e')
         {
-            sendActivate("MDC_OR_TABLE_ACTIVATE_INCREASE_TILT_SCO");
+            // TODO    
 
         }
         else if (input == 'f')
         {
-            sendActivate("MDC_OR_TABLE_ACTIVATE_DECREASE_TILT_SCO");
+            // TODO    
         }
         else if (input == 'g')
         {
-            sendActivate("MDC_OR_TABLE_ACTIVATE_INCREASE_BACK_SCO");
+            // TODO    
         }
         else if (input == 'h')
         {
-            sendActivate("MDC_OR_TABLE_ACTIVATE_DECREASE_BACK_SCO");
+            // TODO    
         }
         else if (input == 'i')
         {
-            consumer->setStringMetricValue("MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO", "NullLevel");
+            // TODO    
         }
         else if (input == 'j')
         {
-            consumer->setStringMetricValue("MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO", "BeachChair");
+            // TODO    
         }
         else if (input == 'k')
         {
-            sendActivate("MDC_OR_TABLE_ACTIVATE_APPLY_PREDEFINED_POSITION");
+            // TODO    
         }
 
 
         else if (input == 'y')
         {
-            auto state = consumer->requestStates({"MDC_OR_TABLE_HEIGHT", "MDC_OR_TABLE_TREND", "MDC_OR_TABLE_TILT", "MDC_OR_TABLE_BACKPLATE", "MDC_DEV_OR_TABLE_PREDEFINED_POSITION"});
-            for (auto& numeric : state.getNumericMetricStateList())
-            {
-                std::cout << numeric->getDescriptorHandle().getValue() << ": " << numeric->getMetricValue()->getValue().getValue() << std::endl;
-            }
-            for (auto& enumString : state.getEnumStringMetricStateList())
-            {
-                std::cout << enumString->getDescriptorHandle().getValue() << ": " << enumString->getMetricValue()->getValue().getValue() << std::endl;
-            }
-
+            // TODO
+            // Request 
         }
         else if (input == 'z')
         {
@@ -330,6 +305,8 @@ int main(int argc, char* argv[])
         }
     }
 
+    consumer->shutdown();
+    consumer.reset();
 
 
     LogBroker::getInstance().log(LogMessage("ORTableConsumer", Severity::Notice, "Shutting down"));
