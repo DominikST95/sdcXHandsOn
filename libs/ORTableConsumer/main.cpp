@@ -313,8 +313,16 @@ int main(int argc, char* argv[])
 
         else if (input == 'y')
         {
-            auto state = consumer->requestStates({"MDC_OR_TABLE_HEIGHT", "MDC_OR_TABLE_TREND", "MDC_OR_TABLE_TILT", "MDC_OR_TABLE_BACKPLATE" });
-            // TODO PRINT
+            auto state = consumer->requestStates({"MDC_OR_TABLE_HEIGHT", "MDC_OR_TABLE_TREND", "MDC_OR_TABLE_TILT", "MDC_OR_TABLE_BACKPLATE", "MDC_DEV_OR_TABLE_PREDEFINED_POSITION"});
+            for (auto& numeric : state.getNumericMetricStateList())
+            {
+                std::cout << numeric->getDescriptorHandle().getValue() << ": " << numeric->getMetricValue()->getValue().getValue() << std::endl;
+            }
+            for (auto& enumString : state.getEnumStringMetricStateList())
+            {
+                std::cout << enumString->getDescriptorHandle().getValue() << ": " << enumString->getMetricValue()->getValue().getValue() << std::endl;
+            }
+
         }
         else if (input == 'z')
         {

@@ -105,24 +105,24 @@
               <p2:MaxLimits AbsoluteAccuracy="1" Lower="-25" Upper="-20"/>
             </p2:AlertCondition>
 
-            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_BACK_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_BACKPLATE_UPPER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
               <p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
               <p2:MaxLimits AbsoluteAccuracy="1" Lower="-40" Upper="-35"/>
             </p2:AlertCondition>
-            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_BACK_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
+            <p2:AlertCondition Handle="MDC_DEV_OR_TABLE_BACKPLATE_LOWER" Kind="Phy" Priority="Me" xsi:type="p2:LimitAlertConditionDescriptor">
               <p2:Source>MDC_OR_TABLE_HEIGHT</p2:Source>
               <p2:MaxLimits AbsoluteAccuracy="1" Lower="75" Upper="80"/>
             </p2:AlertCondition>
 
 
             <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_HEIGHT_UPPER" Handle="MDC_DEV_OR_TABLE_HEIGHT_UPPER_SIGNAL" Latching="false" Manifestation="Aud"/>
-            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_HEIGHT_LOWER" Handle="MDC_DEV_OR_TABLE_HEIGHT_UPPER_LOWER" Latching="false" Manifestation="Aud"/>
+            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_HEIGHT_LOWER" Handle="MDC_DEV_OR_TABLE_HEIGHT_LOWER_SIGNAL" Latching="false" Manifestation="Aud"/>
             <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_TREND_UPPER" Handle="MDC_DEV_OR_TABLE_TREND_UPPER_SIGNAL" Latching="false" Manifestation="Aud"/>
-            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_TREND_LOWER" Handle="MDC_DEV_OR_TABLE_TREND_UPPER_LOWER" Latching="false" Manifestation="Aud"/>
+            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_TREND_LOWER" Handle="MDC_DEV_OR_TABLE_TREND_LOWER_SIGNAL" Latching="false" Manifestation="Aud"/>
             <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_TILT_UPPER" Handle="MDC_DEV_OR_TABLE_TILT_UPPER_SIGNAL" Latching="false" Manifestation="Aud"/>
-            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_TILT_LOWER" Handle="MDC_DEV_OR_TABLE_TILT_UPPER_LOWER" Latching="false" Manifestation="Aud"/>
-            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_BACK_UPPER" Handle="MDC_DEV_OR_TABLE_BACK_UPPER_SIGNAL" Latching="false" Manifestation="Aud"/>
-            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_BACK_LOWER" Handle="MDC_DEV_OR_TABLE_BACK_UPPER_LOWER" Latching="false" Manifestation="Aud"/>
+            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_TILT_LOWER" Handle="MDC_DEV_OR_TABLE_TILT_LOWER_SIGNAL" Latching="false" Manifestation="Aud"/>
+            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_BACKPLATE_UPPER" Handle="MDC_DEV_OR_TABLE_BACKPLATE_UPPER_SIGNAL" Latching="false" Manifestation="Aud"/>
+            <p2:AlertSignal ConditionSignaled="MDC_DEV_OR_TABLE_BACKPLATE_LOWER" Handle="MDC_DEV_OR_TABLE_BACKPLATE_LOWER_SIGNAL" Latching="false" Manifestation="Aud"/>
 
 
             <!--TODO: add otherrs-->
@@ -193,26 +193,26 @@
       <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_TILT_LOWER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
         <p2:Limits AbsoluteAccuracy="1" Lower="-25" Upper="-20"/>
       </p2:State>
-      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_BACK_UPPER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_BACKPLATE_UPPER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
         <p2:Limits AbsoluteAccuracy="1" Lower="75" Upper="80"/>
       </p2:State>
-      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_BACK_LOWER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_BACKPLATE_LOWER" MonitoredAlertLimits="All" StateVersion="0" xsi:type="p2:LimitAlertConditionState">
         <p2:Limits AbsoluteAccuracy="1" Lower="-40" Upper="-35"/>
       </p2:State>
 
 
-      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_HEIGHT_UPPER"/>
-      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_HEIGHT_LOWER"/>
-      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_TREND_UPPER"/>
-      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_TREND_LOWER"/>
-      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_TILT_UPPER"/>
-      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_TILT_LOWER"/>
-      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_BACK_UPPER"/>
-      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_BACK_LOWER"/>
+      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_HEIGHT_UPPER_SIGNAL"/>
+      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_HEIGHT_LOWER_SIGNAL"/>
+      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_TREND_UPPER_SIGNAL"/>
+      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_TREND_LOWER_SIGNAL"/>
+      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_TILT_UPPER_SIGNAL"/>
+      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_TILT_LOWER_SIGNAL"/>
+      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_BACKPLATE_UPPER_SIGNAL"/>
+      <p2:State xsi:type="p2:AlertSignalState" DescriptorVersion="0" StateVersion="0" ActivationState="On" Presence="Off" DescriptorHandle="MDC_DEV_OR_TABLE_BACKPLATE_LOWER_SIGNAL"/>
 
       <p2:State xsi:type="p2:AlertSystemState" DescriptorVersion="0" StateVersion="0" ActivationState="On" LastSelfCheck="1579170441478" SelfCheckCount="0" PresentPhysiologicalAlarmConditions="" PresentTechnicalAlarmConditions="" DescriptorHandle="MDC_DEV_OR_TABLE_ASYS"/>
       <p2:State ActivationState="On" DescriptorHandle="MDC_OR_TABLE_HEIGHT" StateVersion="0" xsi:type="p2:NumericMetricState">
-				<p2:MetricValue DeterminationTime="0" Value="0">
+				<p2:MetricValue DeterminationTime="0" Value="80">
 					<p2:MetricQuality Validity="Vld"/>
 				</p2:MetricValue>
 			</p2:State>
