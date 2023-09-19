@@ -4,69 +4,69 @@
 			<p2:Mds Handle="MDC_DEV_OR_TABLE_MDS">
 				<p2:Sco Handle="MDC_DEV_OR_TABLE_PULS_SCO" DescriptorVersion="0" xsi:type="p2:ScoDescriptor">
 					
-					<p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_INCREASE_TABLE_HEIGHT_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+					<p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_INCREASE_TABLE_HEIGHT_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_DEV_OR_TABLE_MDS" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
                             <ext:Extension/>
                             <p2:Type Code="196279">
                                 <p2:ConceptDescription Lang="en-US">The activate function to increase the table height by one cm</p2:ConceptDescription>
                             </p2:Type>
           </p2:Operation>
-          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_DECREASE_TABLE_HEIGHT_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_DECREASE_TABLE_HEIGHT_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_DEV_OR_TABLE_MDS" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">The activate function to decrease the table height by one cm</p2:ConceptDescription>
             </p2:Type>
           </p2:Operation>
-          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_INCREASE_TREND_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_INCREASE_TREND_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_OR_TABLE_TREND" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">The activate function to increase the trend value by 0.5deg</p2:ConceptDescription>
             </p2:Type>
           </p2:Operation>
-          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_DECREASE_TREND_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_DECREASE_TREND_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_OR_TABLE_TREND" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">The activate function to decrease the trend value by 0.5deg</p2:ConceptDescription>
             </p2:Type>
           </p2:Operation>
-          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_INCREASE_TILT_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_INCREASE_TILT_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_OR_TABLE_TILT" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">The activate function to increase the tilt value by 0.5deg</p2:ConceptDescription>
             </p2:Type>
           </p2:Operation>
-          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_DECREASE_TILT_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_DECREASE_TILT_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_OR_TABLE_TILT" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">The activate function to decrease the tilt value by 0.5deg</p2:ConceptDescription>
             </p2:Type>
           </p2:Operation>
-          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_INCREASE_BACKPLATE_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_INCREASE_BACKPLATE_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_OR_TABLE_BACKPLATE" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">The activate function to increase the backplate value by 0.5deg</p2:ConceptDescription>
             </p2:Type>
           </p2:Operation>
-          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_DECREASE_BACKPLATE_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_DECREASE_BACKPLATE_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_OR_TABLE_BACKPLATE" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">The activate function to decrease the backplate value by 0.5deg</p2:ConceptDescription>
             </p2:Type>
           </p2:Operation>
 
-          <p2:Operation Handle="MDC_OR_TABLE_SETALERTSTATE_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:SetAlertStateOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_SETALERTSTATE_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_DEV_OR_TABLE_MDS" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:SetAlertStateOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">The SetAlertState function for remote alarm handling</p2:ConceptDescription>
             </p2:Type>
           </p2:Operation>
 
-          <p2:Operation Handle="MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:SetStringOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_DEV_OR_TABLE_MDS" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:SetStringOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">Set the predefined position function</p2:ConceptDescription>
             </p2:Type>
           </p2:Operation>
-          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_APPLY_PREDEFINED_POSITION" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_APPLY_PREDEFINED_POSITION" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_DEV_OR_TABLE_MDS" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">Applies the predefined position</p2:ConceptDescription>

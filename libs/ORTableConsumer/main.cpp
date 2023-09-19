@@ -65,7 +65,7 @@ void onNumericMetricStateUpdate(ParticipantModel::PM::NumericMetricState state)
 {
     // in this example the received update is just output
     LogBroker::getInstance().log(LogMessage("ORTableConsumer",
-                                            Severity::Notice,
+                                            Severity::Informational,
                                             "Received NumericMetricState with descriptor handle: " + state.getDescriptorHandle().getValue()
                                                 + " and value: " + state.getMetricValue()->getValue().getValue()));
 }
@@ -194,7 +194,7 @@ int main(int argc, char* argv[])
 
     Logging::LogBroker::getInstance().registerLogger(consoleLoggerTag, consoleLogger);
     Logging::LogBroker::getInstance().registerLogger(fileLoggerTag, fileLogger);
-    Logging::LogBroker::getInstance().setLogLevel(Logging::Severity::Notice);
+    Logging::LogBroker::getInstance().setLogLevel(Logging::Severity::Debug);
 
     // init the core of the framework
     LogBroker::getInstance().log(LogMessage("ORTableConsumer", Severity::Notice, "Creating Core..."));
