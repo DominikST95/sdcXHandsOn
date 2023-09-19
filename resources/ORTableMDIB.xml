@@ -60,6 +60,20 @@
             </p2:Type>
           </p2:Operation>
 
+          <p2:Operation Handle="MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:SetStringOperationDescriptor">
+            <ext:Extension/>
+            <p2:Type Code="196279">
+              <p2:ConceptDescription Lang="en-US">Set the predefined position function</p2:ConceptDescription>
+            </p2:Type>
+          </p2:Operation>
+          <p2:Operation Handle="MDC_OR_TABLE_ACTIVATE_APPLY_PREDEFINED_POSITION" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="mds0" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:ActivateOperationDescriptor">
+            <ext:Extension/>
+            <p2:Type Code="196279">
+              <p2:ConceptDescription Lang="en-US">Applies the predefined position</p2:ConceptDescription>
+            </p2:Type>
+          </p2:Operation>
+
+
 
         </p2:Sco>
 				<p2:Vmd Handle="MDC_DEV_OR_TABLE_VMD">
@@ -137,6 +151,25 @@
             </p2:Metric>
 	
           </p2:Channel>
+
+          <p2:Channel Handle="MDC_DEV_OR_TABLE_CH_PREDEFINED_POSITION" SafetyClassification="MedB">
+            <p2:Metric Handle="MDC_DEV_OR_TABLE_PREDEFINED_POSITION" DescriptorVersion="0" SafetyClassification="MedA" MetricCategory="Set" MetricAvailability="Intr" xsi:type="p2:EnumStringMetricDescriptor">
+              <p2:Type Code="196175">
+                <p2:ConceptDescription Lang="en-US">Predefined positionc</p2:ConceptDescription>
+              </p2:Type>
+              <p2:Unit Code="262656">
+                <p2:ConceptDescription Lang="en-US">no unit</p2:ConceptDescription>
+              </p2:Unit>
+              <p2:AllowedValue>
+                <p2:Value>BeachChair</p2:Value>
+              </p2:AllowedValue>
+              <p2:AllowedValue>
+                <p2:Value>NullLevel</p2:Value>
+              </p2:AllowedValue>
+            </p2:Metric>
+
+          </p2:Channel>
+          
 				</p2:Vmd>
 			</p2:Mds>
 		</p2:MdDescription>
@@ -198,11 +231,16 @@
           <p2:MetricQuality Validity="Vld"/>
         </p2:MetricValue>
       </p2:State>
-
+      <p2:State xsi:type="p2:EnumStringMetricState" DescriptorHandle="MDC_DEV_OR_TABLE_PREDEFINED_POSITION" DescriptorVersion="0" StateVersion="0">
+        <p2:MetricValue Value="NullLevel">
+          <p2:MetricQuality Validity="Vld"/>
+        </p2:MetricValue>
+      </p2:State>
 
       <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_MDS" StateVersion="0" xsi:type="p2:MdsState"/>
 			<p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_VMD" StateVersion="0" xsi:type="p2:VmdState"/>
 			<p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_POSITION" StateVersion="0" xsi:type="p2:ChannelState"/>
+      <p2:State ActivationState="On" DescriptorHandle="MDC_DEV_OR_TABLE_CH_PREDEFINED_POSITION" StateVersion="0" xsi:type="p2:ChannelState"/>
 
       <p2:State xsi:type="p2:ActivateOperationState" DescriptorVersion="0" StateVersion="0" OperatingMode="En" DescriptorHandle="MDC_OR_TABLE_ACTIVATE_INCREASE_TABLE_HEIGHT_SCO"/>
       <p2:State xsi:type="p2:ActivateOperationState" DescriptorVersion="0" StateVersion="0" OperatingMode="En" DescriptorHandle="MDC_OR_TABLE_ACTIVATE_DECREASE_TABLE_HEIGHT_SCO"/>
@@ -212,7 +250,12 @@
       <p2:State xsi:type="p2:ActivateOperationState" DescriptorVersion="0" StateVersion="0" OperatingMode="En" DescriptorHandle="MDC_OR_TABLE_ACTIVATE_DECREASE_TILT_SCO"/>
       <p2:State xsi:type="p2:ActivateOperationState" DescriptorVersion="0" StateVersion="0" OperatingMode="En" DescriptorHandle="MDC_OR_TABLE_ACTIVATE_INCREASE_BACKPLATE_SCO"/>
       <p2:State xsi:type="p2:ActivateOperationState" DescriptorVersion="0" StateVersion="0" OperatingMode="En" DescriptorHandle="MDC_OR_TABLE_ACTIVATE_DECREASE_BACKPLATE_SCO"/>
-  
-		</p2:MdState>
+
+      <p2:State xsi:type="p2:ActivateOperationState" DescriptorVersion="0" StateVersion="0" OperatingMode="En" DescriptorHandle="MDC_OR_TABLE_ACTIVATE_APPLY_PREDEFINED_POSITION"/>
+      <p2:State xsi:type="p2:SetStringOperationState" DescriptorVersion="0" StateVersion="0" OperatingMode="En" DescriptorHandle="MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO"/>
+
+      
+
+    </p2:MdState>
 	</mm:Mdib>
 </mm:GetMdibResponse>

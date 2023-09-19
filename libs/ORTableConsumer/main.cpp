@@ -252,8 +252,12 @@ int main(int argc, char* argv[])
         std::cout << "f) decrease tilt" << std::endl;
         std::cout << "g) increase backplate" << std::endl;
         std::cout << "h) decrease backplate" << std::endl;
-        std::cout << "i) Print status" << std::endl;
-        std::cout << "j) Exit" << std::endl;
+        std::cout << "i) Set predefined position to nullposition " << std::endl;
+        std::cout << "j) Set predefined position to beach chair" << std::endl;
+        std::cout << "k) Apply predefined position" << std::endl;
+
+        std::cout << "y) Print status" << std::endl;
+        std::cout << "z) Exit" << std::endl;
         std::cout << "Enter: ";
 
 
@@ -295,10 +299,24 @@ int main(int argc, char* argv[])
         }
         else if (input == 'i')
         {
+            consumer->setStringMetricValue("MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO", "NullLevel");
+        }
+        else if (input == 'j')
+        {
+            consumer->setStringMetricValue("MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO", "BeachChair");
+        }
+        else if (input == 'k')
+        {
+            sendActivate("MDC_OR_TABLE_ACTIVATE_APPLY_PREDEFINED_POSITION");
+        }
+
+
+        else if (input == 'y')
+        {
             auto state = consumer->requestStates({"MDC_OR_TABLE_HEIGHT", "MDC_OR_TABLE_TREND", "MDC_OR_TABLE_TILT", "MDC_OR_TABLE_BACKPLATE" });
             // TODO PRINT
         }
-        else if (input == 'j')
+        else if (input == 'z')
         {
             exit = true;
         }

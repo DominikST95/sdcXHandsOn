@@ -28,8 +28,12 @@
 #include "ProviderAPI/StateHandler/ExternalControlHandler.h"
 #include "ProviderAPI/StateHandler/TransactionHandler.h"
 #include "ProviderAPI/StateHandler/SetOperationStatesContainer/SetValueStates.h"
+#include "ProviderAPI/StateHandler/SetOperationStatesContainer/SetStringStates.h"
+
 #include "ProviderAPI/StateHandler/SetOperationStatesContainer/ActivateStates.h"
 #include "ProviderAPI/StateHandler/DenyAllExternalControlHandler.h"
+
+#include "ParticipantModel/PM/StringMetricState.h"
 
 #include <iostream>
 #include <chrono>
@@ -49,6 +53,11 @@ using namespace ProviderAPI;
 using namespace ProviderAPI::StateHandler;
 using namespace std::chrono_literals;
 
+enum class PredefinedPosition
+{
+    NullLevel,
+    BeachChair
+};
 
 struct VirtualORTable
 {
@@ -56,8 +65,39 @@ struct VirtualORTable
     double trend; // -45° till +45°
     double tilt; // -25° till +25°
     double backplate; // -40° till +80°
+    PredefinedPosition predefinedPosition;
 };
 
+VirtualORTable virtualTable;
+
+/**
+ * @brief This state handler is used for Activate requests. On each Activate request for an enabled operation,
+ * the "onNewTransaction"-method is triggered. Here, the Activate is logged and the next mode is selected.
+ */
+class ORTableSetStringHandler : public ExternalControlHandler<SetOperationStatesContainer::SetStringStates>
+{
+private:
+public:
+    ORTableSetStringHandler() = default;
+
+    // call to user code
+    virtual void
+        onNewTransaction(std::shared_ptr<TransactionHandler<SetOperationStatesContainer::SetStringStates>> p_transactionHandler) override
+    {
+        if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO")
+        {
+            if (p_transactionHandler->getData().getState().getMetricValue()->getValue().getValue() == "NullLevel")
+            {
+                virtualTable.predefinedPosition = PredefinedPosition::NullLevel;
+            }
+            else if (p_transactionHandler->getData().getState().getMetricValue()->getValue().getValue() == "BeachChair")
+            {
+                virtualTable.predefinedPosition = PredefinedPosition::BeachChair;
+            }
+            p_transactionHandler->transitionFromStartedTo(UserInterfaces::Set::OnStartedInvocationState::Fin);
+        }
+    }
+};
 
 
 /**
@@ -74,9 +114,25 @@ public:
     virtual void 
         onNewTransaction(std::shared_ptr<TransactionHandler<SetOperationStatesContainer::ActivateStates>> p_transactionHandler) override
     {
+        if (p_transactionHandler->getData().getOperationHandle().getValue() == "MDC_OR_TABLE_ACTIVATE_APPLY_PREDEFINED_POSITION")
+        {
+            // Apply change
+            if (virtualTable.predefinedPosition == PredefinedPosition::NullLevel)
+            {
+                virtualTable.height = 80;
+                virtualTable.trend = 0;
+                virtualTable.tilt = 0;
+                virtualTable.backplate = 0;
+            }
+            else if (virtualTable.predefinedPosition == PredefinedPosition::BeachChair)
+            {
+                virtualTable.height = 80;
+                virtualTable.trend = 0;
+                virtualTable.tilt = 0;
+                virtualTable.backplate = 45;
+            }
+        }
 
-        p_transactionHandler->transitionFromEntryTo(UserInterfaces::Set::OnEntryInvocationState::Wait);
-        p_transactionHandler->transitionFromWaitingTo(UserInterfaces::Set::OnWaitInvocationState::Start);
         p_transactionHandler->transitionFromStartedTo(UserInterfaces::Set::OnStartedInvocationState::Fin);
     }
 };
