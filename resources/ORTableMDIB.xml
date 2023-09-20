@@ -60,7 +60,7 @@
             </p2:Type>
           </p2:Operation>
 
-          <p2:Operation Handle="MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_DEV_OR_TABLE_MDS" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:SetStringOperationDescriptor">
+          <p2:Operation Handle="MDC_OR_TABLE_SETSTRING_PREDEFINED_POSITIONS_SCO" DescriptorVersion="0" SafetyClassification="MedC" OperationTarget="MDC_DEV_OR_TABLE_PREDEFINED_POSITION" MaxTimeToFinish="P0Y0M0DT0H0M1.0S" Retriggerable="true" xsi:type="p2:SetStringOperationDescriptor">
             <ext:Extension/>
             <p2:Type Code="196279">
               <p2:ConceptDescription Lang="en-US">Set the predefined position function</p2:ConceptDescription>
